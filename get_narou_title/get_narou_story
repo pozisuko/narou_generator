@@ -5,15 +5,15 @@ import json
 import gzip
 
 
-def titles():
-    of = 't-s'  # 出力項目：タイトル, あらすじ
-    lim = '100'  # 出力数：1~500
+def story():
+    of = 's'  # 出力項目 :あらすじ
+    lim = '500'  # 出力数：1~500
     out = 'json'  # 出力形式
-    g_zip = '5'  # gzip圧縮レベル/ここgzipと干渉していたので_付け足し
+    Gzip = '5'  # gzip圧縮レベル
     order = 'weekly'  # 出力順序：週間ユニークアクセスが多い順
-    biggenre = '2'  # ジャンル「異世界」を指定
+    biggenre = '2'  # ジャンル:異世界
     url = 'https://api.syosetu.com/novelapi/api/?' + 'of=' + of + '&' + 'lim' + lim + '&' + 'out=' + \
-        out + '&' + 'gzip=' + g_zip + '&' + 'order=' + \
+        out + '&' + 'gzip=' + Gzip + '&' + 'order=' + \
         order + '&' + 'biggenre=' + biggenre
 
     response = requests.get(url)  # responceオブジェクトを生成
@@ -25,4 +25,4 @@ def titles():
     print(response_json)
 
 
-titles()
+story()
