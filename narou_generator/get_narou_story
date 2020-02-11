@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+import requests
+import json
+import gzip
+
+
+def story():
+    of = 's'  # 出力項目 :あらすじ
+    lim = '500'  # 出力数：1~500
+    out = 'json'  # 出力形式
+    Gzip = '5'  # gzip圧縮レベル
+    order = 'dailypoint'  # 出力順序：日別ポイント数
+    biggenre = '2'  # ジャンル:異世界
+    istensei = '1'  # キーワード：異世界転生
+    minlen = '30000'  # 30000字以上の小説
+    url = 'https://api.syosetu.com/novelapi/api/?' + 'of=' + of + '&' + 'lim=' + lim + '&' + 'out=' + \
+        out + '&' + 'gzip=' + Gzip + '&' + 'order=' + \
+        order + '&' + 'biggenre=' + biggenre + '&' + \
+        'istensei=' + istensei + '&' + 'minlen=' + minlen
+
+    response = requests.get(url)  # responceオブジェクトを生成
+    response.encoding = 'gzip'  # encodeingを指定
+    r = response.content  # バイナリ形式で取得
+    res_content = gzip.decompress(r).decode("utf-8")  # gzip展開, UTF-8
+    response_json = json.loads(res_content)  # jsonのデコーディング
+
+    print(response_json)
+
+
+story()
